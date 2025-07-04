@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
+    android:gravity="center">
+
+    <!-- Card for visual appeal -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="16dp"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Server Status: ❌ Not Running"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_dark"
+                android:gravity="center"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/ipText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your IP: -"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="#555555" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Folder select button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/selectFolderBtn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📁 Choose Upload Folder"
+        android:textAllCaps="false"
+        android:icon="@android:drawable/ic_menu_upload"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Start server -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/startBtn"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="▶️ Start File Server"
+        android:textAllCaps="false"
+        android:icon="@android:drawable/ic_media_play"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Stop server -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/stopBtn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏹️ Stop File Server"
+        android:textAllCaps="false"
+        android:icon="@android:drawable/ic_media_pause"
+        />
+
+</LinearLayout>

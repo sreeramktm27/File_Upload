@@ -1,0 +1,72 @@
+<form id="uploadForm">
+    <input type="file" id="fileInput" name="file" multiple />
+    <button type="submit" id="uploadBtn">
+        <span id="btnText">📤 Upload</span>
+        <span id="spinner" style="display:none;">⏳</span>
+    </button>
+</form>
+
+<p id="statusMessage"></p>
+<progress id="uploadProgress" value="0" max="100" style="width: 100%; display: none;"></progress>
+<p id="uploadDetails"></p>
+
+<script>
+    const form = document.getElementById("uploadForm");
+    const fileInput = document.getElementById("fileInput");
+    const uploadBtn = document.getElementById("uploadBtn");
+    const btnText = document.getElementById("btnText");
+    const spinner = document.getElementById("spinner");
+    const statusMsg = document.getElementById("statusMessage");
+    const progressBar = document.getElementById("uploadProgress");
+    const uploadDetails = document.getElementById("uploadDetails");
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const files = fileInput.files;
+      if (!files.length) return;
+
+      const formData = new FormData();
+      for (const file of files) {
+        formData.append("file", file); // you can use file.name for field name if needed
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/upload");
+
+      xhr.upload.onloadstart = () => {
+        progressBar.style.display = "block";
+        progressBar.value = 0;
+        btnText.textContent = "Uploading...";
+        spinner.style.display = "inline";
+        statusMsg.textContent = "";
+        uploadDetails.textContent = "Starting upload...";
+      };
+
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const percent = (e.loaded / e.total) * 100;
+          const uploadedMB = (e.loaded / (1024 * 1024)).toFixed(2);
+          const totalMB = (e.total / (1024 * 1024)).toFixed(2);
+          progressBar.value = percent;
+          uploadDetails.textContent = `Uploaded ${uploadedMB} MB of ${totalMB} MB (${percent.toFixed(1)}%)`;
+        }
+      };
+
+      xhr.onload = () => {
+        spinner.style.display = "none";
+        btnText.textContent = "📤 Upload";
+        statusMsg.textContent = xhr.status === 200 ? "✅ " + xhr.responseText : "❌ Upload failed";
+        uploadDetails.textContent = "";
+        progressBar.style.display = "none";
+        form.reset();
+      };
+
+      xhr.onerror = () => {
+        spinner.style.display = "none";
+        statusMsg.textContent = "❌ Upload error occurred.";
+        progressBar.style.display = "none";
+      };
+
+      xhr.send(formData);
+    };
+</script>

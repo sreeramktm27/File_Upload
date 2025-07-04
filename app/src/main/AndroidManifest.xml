@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fileuploadserver">
+
+    <!-- Required Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="File Upload Server"
+        android:icon="@drawable/ic_lancher"
+        android:roundIcon="@drawable/ic_lancher"
+        android:theme="@style/Theme.FileUploadServer"
+        android:usesCleartextTraffic="true">
+
+        <!-- Main Launcher Activity -->
+        <activity android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- QR Code Display Activity -->
+        <activity android:name=".QrActivity" />
+
+        <!-- Foreground HTTP Server Service -->
+        <service
+            android:name=".FileServerService"
+            android:foregroundServiceType="dataSync"
+            android:exported="false" />
+    </application>
+</manifest>

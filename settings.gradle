@@ -1,0 +1,53 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { url "https://maven.zohodl.com/" } //for apptics plugin
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://build-new.zohocorp.com/me_android/kmm_framework/milestones/premaster/KMM_FRAMEWORK_ANDROID_25.06.03/"    //for common fw
+            credentials {
+                username = System.getProperty("org.gradle.zandroid.buildUser")
+                password = System.getProperty("org.gradle.zandroid.buildPassword")
+            }
+        }
+        maven {
+            url "https://build-new.zohocorp.com/me_android/uemandroidui/milestones/main/UEMANDROIDUI_25.06.01/"    //for ui library
+            credentials {
+                username = System.getProperty("org.gradle.zandroid.buildUser")
+                password = System.getProperty("org.gradle.zandroid.buildPassword")
+            }
+        }
+        maven {
+            url "https://zartifacts.csez.zohocorpin.com/repository/android-cache"
+            credentials {
+                username = "sreeram.ktm"
+                password = "d3f96c2f5bc2ee174e88"
+            }
+        }
+        maven {
+            url "https://build-new.zohocorp.com/zoho_android/"   //for iam sso kit
+            credentials {
+                username = System.getProperty("org.gradle.zandroid.buildUser")
+                password = System.getProperty("org.gradle.zandroid.buildPassword")
+            }
+        }
+        maven { url "https://maven.zohodl.com/" } //for apptics
+    }
+}
+rootProject.name = "File Upload "
+include ':app'
+//FOR LOCAL DEVELOPMENT
+//include ':uem_ui'
+//include ':uemmdmfw'
+//include ':uemmobilefw'
+//project(':uem_ui').projectDir = new File("../uemandroidui/app/libs/uem_ui")
+//project(':uemmdmfw').projectDir = new File("/Users/sreeram-10645/Work/Android/GitHub/kmm-framework/uemmdmfw")
+//project(':uemmobilefw').projectDir = new File("../../../UEMMobileFW/kmm-framework/uemmobilefw")
